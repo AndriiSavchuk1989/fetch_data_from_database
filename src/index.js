@@ -1,16 +1,27 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
+import { products } from "./products";
 import "./styles.css";
 
-function App() {
+function Product(props) {
+  const { items } = props;
   return (
-    <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
+    <div>
+      {items.map(product => (
+        <div className="product" key={product.id}>
+          <div className="product-image-wrapper">
+            <a className="product-page-link" href={product.id}>
+              <img alt={product.name} src={product.image} />
+            </a>
+          </div>
+          <div className="buttons-wrapper">
+            <button>{product.type.toUpperCase()}</button>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
 
 const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+ReactDOM.render(<Product items={products} />, rootElement);
